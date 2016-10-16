@@ -44,30 +44,33 @@ class MainWindow:
         self.game_actions_frame = gui.Frame(self.master)
         game_name = self.game_selected.get()
         game = self.games.game_lookup[game_name]                
-        self.game_pokes = []
+        self.game_pokes = [(
+            'Name',
+            'Address',
+            'Value',
+            'Frozen'
+        )]
+        self.poke_table = SimpleTable(self.game_actions_frame)
         for poke in game.memory_pokes:
-            row = gui.Frame(self.game_actions_frame)
-            name_label = gui.Label(row, text=poke.name)
-            address_label = gui.Label(row, text=poke.address)
-            value_label = gui.Label(row, text=poke.value)
+            name_label = gui.Label(self.poke_table, text=poke.name)
+            address_label = gui.Label(self.poke_table, text=poke.address)
+            value_label = gui.Label(self.poke_table, text=poke.value)
             freeze = gui.IntVar()
             freeze.trace('w', self.change_frozen_values)
-            freezeCheck = gui.Checkbutton(row, variable=freeze)            
-            self.game_pokes.append((row,name_label,address_label,value_label,freeze, poke))
-            row.grid()
-            name_label.grid()
-            address_label.grid()
-            value_label.grid()
-            freezeCheck.grid()
+            freezeCheck = gui.Checkbutton(self.poke_table, variable=freeze)            
+            self.game_pokes.append((name_label,address_label,value_label,freezeCheck, freeze, poke))
+        self.poke_table.set_rows(self.game_pokes)
+        self.poke_table.grid()
         self.game_actions_frame.grid()
 
     def change_frozen_values(self, name, index, mode):
         global KILL_THREAD
         pokes = []
+        freeze_var_position = 4
         for tup in self.game_pokes:
-            print("Tup[4] = {}".format(tup[4].get()))
-            if tup[4].get() == 1:
-                pokes.append(tup[5])
+            if len(tup) > freeze_var_position:
+                if tup[freeze_var_position].get() == 1:
+                    pokes.append(tup[len(tup)-1])
         if self.poke_thread != None:
             KILL_THREAD=True
             self.poke_thread.join()
@@ -79,8 +82,43 @@ class MainWindow:
 def freeze_pokes(pokes, interval_seconds):
     global KILL_THREAD
     while True and not KILL_THREAD:
-        print("Running thread")
         for poke in pokes:
-            print("Poking {}: {} -> {}".format(poke.name, poke.address, poke.value))
+            print("--DEBUG Poking {}: {} -> {}".format(poke.name, poke.address, poke.value))
         time.sleep(interval_seconds)
-    print("The thread is now dead")
+
+# http://stackoverflow.com/questions/11047803/creating-a-table-look-a-like-tkinter
+class SimpleTable(gui.Frame):
+    def __init__(self, parent):
+        # use black background so it "peeks through" to 
+        # form grid lines
+        gui.Frame.__init__(self, parent, background="black")    
+    
+    def set_rows(self, rows):
+        non_widget_col = 4
+        self._widgets = []
+        ii = 0
+        jj = 0
+        for row in rows:
+            current_row = []
+            for column in row:                
+                if jj < non_widget_col:
+                    if ii > 0:
+                        column.config(borderwidth=0)
+                        column.grid(row=ii, column=jj, sticky="nsew", padx=1, pady=1)
+                        current_row.append(column)
+                    else:
+                        label = gui.Label(self, text=column, borderwidth=0, width=10)
+                        label.grid(row=ii, column=jj, sticky="nsew", padx=1, pady=1)
+                        current_row.append(column)
+                jj += 1
+            jj = 0
+            ii += 1
+            self._widgets.append(current_row)
+
+        for column in range(0,non_widget_col):
+            self.grid_columnconfigure(column, weight=1)        
+
+
+    def set(self, row, column, value):
+        widget = self._widgets[row][column]
+        widget.configure(text=value)

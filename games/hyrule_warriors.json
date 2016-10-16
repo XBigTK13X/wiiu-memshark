@@ -2,7 +2,17 @@
 	"name":"Hyrule Warriors",
 	"memory_pokes":[
 		{
-			"name":"High K.O. Count",
+			"name":"Max Rupees",
+			"address":"0x35614E84",
+			"value":9999999
+		},
+		{
+			"name":"Player 1 - Damage Taken",
+			"address": "0x1071211C",
+			"value": "0x00000000"
+		},
+		{
+			"name":"Player 1 - High K.O. Count",
 			"address": "0x10712120",
 			"value": "0x00003419"
 		}
