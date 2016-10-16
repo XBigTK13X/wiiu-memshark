@@ -1,3 +1,4 @@
 {
-	"wii_u_ip":"192.168.1.119"
+	"wii_u_ip": "192.168.1.119",
+	"freeze_poke_interval_seconds": 2
 }
