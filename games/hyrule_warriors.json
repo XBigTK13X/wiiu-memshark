@@ -1,0 +1,10 @@
+{
+	"name":"Hyrule Warriors",
+	"memory_pokes":[
+		{
+			"name":"High K.O. Count",
+			"address": "0x10712120",
+			"value": "0x00003419"
+		}
+	]
+}
