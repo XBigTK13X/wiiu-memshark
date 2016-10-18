@@ -39,6 +39,7 @@ class MainWindow:
 
         self.label.grid()
         self.game_list.grid()
+        self.game_version.grid()
 
     def change_game_selection(self, name, index, mode):
         if self.game_actions_frame != None:
@@ -46,7 +47,7 @@ class MainWindow:
         self.game_actions_frame = gui.Frame(self.master)
         game_name = self.game_selected.get()
         game = self.games.game_lookup[game_name]
-        self.game_version.config(text=game.version)                
+        self.game_version.config(text='Game Version: {}'.format(game.version))                
         self.game_pokes = [(
             'Name',
             'Address',
