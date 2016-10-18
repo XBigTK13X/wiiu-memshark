@@ -1,16 +1,16 @@
 from py_gecko import tcpgecko
 
 class Memshark():
-	def __init__(self, wii_u_ip):
-		self.wii_u_ip = wii_u_ip
+	def __init__(self, config):
+		self.wii_u_ip = config.wii_u_ip
 		self.tcp_gecko = None
 
 	def connect(self):
 		if self.tcp_gecko != None:
 			self.tcp_gecko.s.close()
-		self.tcp_gecko = TCPGecko(self.wii_u_ip)
+		self.tcp_gecko = tcpgecko.TCPGecko(self.wii_u_ip)
 
-	def disconnect():
+	def disconnect(self):
 		if self.tcp_gecko != None:
 			self.tcp_gecko.s.close()
 

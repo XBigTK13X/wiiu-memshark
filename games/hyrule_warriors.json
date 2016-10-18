@@ -3,11 +3,6 @@
 	"version": "1.11.0",
 	"memory_pokes":[
 		{
-			"name":"Max Rupees",
-			"address":"0x35614E84",
-			"value":9999999
-		},
-		{
 			"name":"Player 1 - Damage Taken",
 			"address": "0x1071211C",
 			"value": "0x00000000"

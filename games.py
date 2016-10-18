@@ -29,5 +29,6 @@ class MemoryPoke():
 	def __init__(self, dataDict):
 		self.raw = dataDict
 		self.name = self.raw['name']
-		self.address = self.raw['address']
-		self.value = self.raw['value']
+		print('handling {}'.format(self.name))
+		self.address = int(self.raw['address'], 16)
+		self.value = int(self.raw['value'], 16)

@@ -5,6 +5,7 @@ import gui
 
 config = MemsharkConfig('config.json')
 games = Games('games')
+memshark = Memshark(config)
 
-app = gui.MainApp(config, games)
+app = gui.MainApp(config, games, memshark)
 app.start()
