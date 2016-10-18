@@ -35,6 +35,8 @@ class MainWindow:
         # Calling this before the app is drawn causes it to crash
         # self.game_selected.set(self.game_options[0])
 
+        self.game_version = gui.Label(master, text='')
+
         self.label.grid()
         self.game_list.grid()
 
@@ -43,7 +45,8 @@ class MainWindow:
             self.game_actions_frame.destroy()
         self.game_actions_frame = gui.Frame(self.master)
         game_name = self.game_selected.get()
-        game = self.games.game_lookup[game_name]                
+        game = self.games.game_lookup[game_name]
+        self.game_version.config(text=game.version)                
         self.game_pokes = [(
             'Name',
             'Address',
@@ -60,6 +63,8 @@ class MainWindow:
             freezeCheck = gui.Checkbutton(self.poke_table, variable=freeze)            
             self.game_pokes.append((name_label,address_label,value_label,freezeCheck, freeze, poke))
         self.poke_table.set_rows(self.game_pokes)
+        # Kill any frozen values for the previous selection
+        self.change_frozen_values(None, None, None)
         self.poke_table.grid()
         self.game_actions_frame.grid()
 

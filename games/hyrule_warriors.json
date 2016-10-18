@@ -1,5 +1,6 @@
 {
 	"name":"Hyrule Warriors",
+	"version": "1.11.0",
 	"memory_pokes":[
 		{
 			"name":"Max Rupees",

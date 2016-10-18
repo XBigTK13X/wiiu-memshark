@@ -19,6 +19,9 @@ class Game():
 		self.slug = gameFileName.replace('.json','')
 		self.name = self.raw['name']
 		self.memory_pokes = []
+		self.version = 'unknown'
+		if 'version' in self.raw:
+			self.version = self.raw['version']
 		for poke in self.raw['memory_pokes']:
 			self.memory_pokes.append(MemoryPoke(poke))
 
