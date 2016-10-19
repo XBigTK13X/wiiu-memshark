@@ -2,44 +2,54 @@ import tkinter as gui
 import tkinter.ttk as gui_plus
 import threading
 import time
+import server
 
 # This is fine for a single background thread, but a semaphore would be better
 KILL_THREAD = False
 
-class MainApp:    
+
+class MainApp:
+
     def __init__(self, config, games, memshark):
         self.root = gui.Tk()
         self.root.geometry('{}x{}'.format(800, 600))
         self.mainWindow = MainWindow(self.root, config, games, memshark)
-    
+
     def start(self):
         self.root.mainloop()
 
-class MainWindow:    
+
+class MainWindow:
+
     def __init__(self, master, config, games, memshark):
         self.master = master
         self.config = config
         self.games = games
         self.memshark = memshark
+        self.server = server.ExploitServer()
 
         self.poke_thread = None
         self.game_actions_frame = None
         master.title("Memshark")
 
-        self.label = gui.Label(master, text="Wii U IP Address: {}".format(config.wii_u_ip))    
-        self.label.grid()    
-        
+        self.label = gui.Label(master, text="Wii U IP Address: {}".format(config.wii_u_ip))
+        self.label.grid()
+
         self.connection_status_label = gui.Label(master, text='Connection Status: [disconnected]')
-        self.connect_button = gui.Button(master, text="Connect", command = self.connect)
-        self.disconnect_button = gui.Button(master, text="Disconnect", command = self.disconnect)
+        self.connect_button = gui.Button(master, text="Connect to py_gecko", command=self.connect)
+        self.disconnect_button = gui.Button(master, text="Disconnect from py_gecko", command=self.disconnect)
         self.connection_status_label.grid()
         self.connect_button.grid()
         self.disconnect_button.grid()
 
-        self.close_button = gui.Button(master, text="Close", command=master.quit)
-        
+        self.start_exploit_server_button = gui.Button(master, text="Start exploit server", command=self.start_exploit_server)
+        self.stop_exploit_server_button = gui.Button(master, text="Stop exploit server", command=self.stop_exploit_server)
+
+        self.start_exploit_server_button.grid()
+        self.stop_exploit_server_button.grid()
+
         self.game_options = [x.name for x in games.games]
-        self.game_selected = gui.StringVar()        
+        self.game_selected = gui.StringVar()
         self.game_selected.trace('w', self.change_game_selection)
         self.game_list = gui.OptionMenu(master, self.game_selected, *self.game_options)
         self.game_list.config(width=50)
@@ -58,13 +68,19 @@ class MainWindow:
         self.memshark.disconnect()
         self.connection_status_label.config(text='Disconnected')
 
+    def start_exploit_server(self):
+        self.server.start()
+
+    def stop_exploit_server(self):
+        self.server.stop()
+
     def change_game_selection(self, name, index, mode):
         if self.game_actions_frame != None:
             self.game_actions_frame.destroy()
         self.game_actions_frame = gui.Frame(self.master)
         game_name = self.game_selected.get()
         game = self.games.game_lookup[game_name]
-        self.game_version.config(text='Game Version: {}'.format(game.version))                
+        self.game_version.config(text='Game Version: {}'.format(game.version))
         self.game_pokes = [(
             'Name',
             'Address',
@@ -77,11 +93,11 @@ class MainWindow:
             name_label = gui.Label(self.poke_table, text=poke.name)
             address_label = gui.Label(self.poke_table, text=poke.address)
             value_label = gui.Label(self.poke_table, text=poke.value)
-            poke_button = gui.Button(self.poke_table, text='Poke', command = lambda poke=poke: self.poke(poke))
+            poke_button = gui.Button(self.poke_table, text='Poke', command=lambda poke=poke: self.poke(poke))
             freeze = gui.IntVar()
             freeze.trace('w', self.change_frozen_values)
-            freezeCheck = gui.Checkbutton(self.poke_table, variable=freeze)            
-            self.game_pokes.append((name_label,address_label,value_label,poke_button,freezeCheck, freeze, poke))
+            freezeCheck = gui.Checkbutton(self.poke_table, variable=freeze)
+            self.game_pokes.append((name_label, address_label, value_label, poke_button, freezeCheck, freeze, poke))
         self.poke_table.set_rows(self.game_pokes)
         # Kill any frozen values for the previous selection
         self.change_frozen_values(None, None, None)
@@ -101,12 +117,13 @@ class MainWindow:
                 if tup[freeze_var_position].get() == 1:
                     pokes.append(tup[len(tup)-1])
         if self.poke_thread != None:
-            KILL_THREAD=True
+            KILL_THREAD = True
             self.poke_thread.join()
         if len(pokes) > 0:
-            KILL_THREAD=False
+            KILL_THREAD = False
             self.poke_thread = threading.Thread(target=freeze_pokes, args=(pokes, self.config.freeze_poke_interval_seconds, self.memshark))
             self.poke_thread.start()
+
 
 def freeze_pokes(pokes, interval_seconds, memshark):
     global KILL_THREAD
@@ -117,12 +134,15 @@ def freeze_pokes(pokes, interval_seconds, memshark):
         time.sleep(interval_seconds)
 
 # http://stackoverflow.com/questions/11047803/creating-a-table-look-a-like-tkinter
+
+
 class SimpleTable(gui.Frame):
+
     def __init__(self, parent):
-        # use black background so it "peeks through" to 
+        # use black background so it "peeks through" to
         # form grid lines
-        gui.Frame.__init__(self, parent, background="black")    
-    
+        gui.Frame.__init__(self, parent, background="black")
+
     def set_rows(self, rows):
         non_widget_col = 5
         self._widgets = []
@@ -130,7 +150,7 @@ class SimpleTable(gui.Frame):
         jj = 0
         for row in rows:
             current_row = []
-            for column in row:                
+            for column in row:
                 if jj < non_widget_col:
                     if ii > 0:
                         column.config(borderwidth=0)
@@ -145,9 +165,8 @@ class SimpleTable(gui.Frame):
             ii += 1
             self._widgets.append(current_row)
 
-        for column in range(0,non_widget_col):
-            self.grid_columnconfigure(column, weight=1)        
-
+        for column in range(0, non_widget_col):
+            self.grid_columnconfigure(column, weight=1)
 
     def set(self, row, column, value):
         widget = self._widgets[row][column]
