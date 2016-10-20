@@ -1,5 +1,5 @@
 import socket, struct
-from py_gecko.common import *
+from vendor.tcpgecko.common import *
 from binascii import hexlify, unhexlify
 
 def enum(**enums):

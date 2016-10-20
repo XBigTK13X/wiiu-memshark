@@ -1,4 +1,4 @@
-from py_gecko import tcpgecko
+from vendor.tcpgecko import tcpgecko
 
 class Memshark():
 	def __init__(self, config):
