@@ -7,13 +7,18 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 class ExploitHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
+        print("GET is happening")
         self.send_response(200)
+
+        mimeType = 'text/html'
         if self.path == '/':
             self.path = '/index.html'
         if self.path == '/favicon.ico':
             return
+        if '.mp4' in self.path:
+            mimeType = 'video/mp4'
 
-        self.send_header('Content-type', 'text/html')
+        self.send_header('Content-type', mimeType)
         self.end_headers()
 
         file_path = os.path.join(os.path.join(os.getcwd(), 'site/'), self.path[1:len(self.path)])
