@@ -11,6 +11,7 @@ class GameActionsFrame():
 
     def __init__(self, master, games, memshark):
         self.master = tk.Frame(master)
+
         self.games = games
         self.memshark = memshark
         self.poke_thread = None
@@ -18,9 +19,10 @@ class GameActionsFrame():
 
         self.game_options = [x.name for x in self.games.games]
         self.game_selected = tk.StringVar()
+        self.game_selected.set("Choose a game...")
         self.game_selected.trace('w', self.change_game_selection)
         self.game_list = tk.OptionMenu(self.master, self.game_selected, *self.game_options)
-        self.game_list.config(width=50)
+        self.game_list.config(width=50, padx=10, pady=10)
         # Calling this before the app is drawn causes it to crash
         # self.game_selected.set(self.game_options[0])
         self.game_list.grid()

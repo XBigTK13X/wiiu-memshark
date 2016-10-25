@@ -5,7 +5,8 @@ class TableWidget(gui.Frame):
     def __init__(self, parent):
         # use black background so it "peeks through" to
         # form grid lines
-        gui.Frame.__init__(self, parent, background="black")
+        gui.Frame.__init__(self, parent, background="grey")
+        self.config(padx=2, pady=2)
 
     def set_rows(self, rows):
         non_widget_col = 5

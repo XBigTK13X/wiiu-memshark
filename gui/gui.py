@@ -24,14 +24,16 @@ class MainWindow:
         
         self.master.title("Memshark")
 
-        self.label = tk.Label(self.master, text="Wii U IP Address: {}".format(config.wii_u_ip))
-        self.label.grid()
+        self.container = tk.Frame(self.master)
+        self.container.grid(padx=(50,0), pady=(50,0))
 
-        self.notebook = ttk.Notebook(self.master)
+        self.label = tk.Label(self.container, text="Wii U IP Address: {}".format(config.wii_u_ip))
+
+        self.notebook = ttk.Notebook(self.container)
         self.server_frame = exploit_server_frame.ExploitServerFrame(self.notebook, exploit_server)
         self.tcp_gecko_frame = tcp_gecko_frame.TcpGeckoFrame(self.notebook, memshark)
         self.game_actions_frame = game_actions_frame.GameActionsFrame(self.notebook, games, memshark)
-        self.notebook.add(self.server_frame.master, text='Exploit Server')
-        self.notebook.add(self.tcp_gecko_frame.master, text='PyGecko')
-        self.notebook.add(self.game_actions_frame.master, text='Game Actions')           
+        self.notebook.add(self.server_frame.master, text='Exploit Server', padding=[10,10])
+        self.notebook.add(self.tcp_gecko_frame.master, text='PyGecko', padding=[10,10])
+        self.notebook.add(self.game_actions_frame.master, text='Game Actions', padding=[10,10])           
         self.notebook.grid()
