@@ -9,11 +9,12 @@ class GameActionsFrame():
     
     KILL_THREAD = False
 
-    def __init__(self, master, games, memshark):
+    def __init__(self, master, games, memshark, config):
         self.master = tk.Frame(master)
 
         self.games = games
         self.memshark = memshark
+        self.config = config
         self.poke_thread = None
         self.game_actions_frame = None
 
@@ -46,9 +47,9 @@ class GameActionsFrame():
         )]
         self.poke_table = table_widget.TableWidget(self.game_actions_frame)
         for poke in game.memory_pokes:
-            name_label = tk.Label(self.poke_table, text=poke.name)
-            address_label = tk.Label(self.poke_table, text=poke.address)
-            value_label = tk.Label(self.poke_table, text=poke.value)
+            name_label = tk.Label(self.poke_table, text=poke.name, anchor='w')
+            address_label = tk.Label(self.poke_table, text=poke.pretty_address, anchor='w')
+            value_label = tk.Label(self.poke_table, text=poke.pretty_value, anchor='w')
             poke_button = tk.Button(self.poke_table, text='Poke', command=lambda poke=poke: self.poke(poke))
             freeze = tk.IntVar()
             freeze.trace('w', self.change_frozen_values)
@@ -61,7 +62,7 @@ class GameActionsFrame():
         self.game_actions_frame.grid()
 
     def poke(self, poke):
-        print("--DEBUG Poking {}: {} -> {}".format(poke.name, poke.address, poke.value))
+        print("--DEBUG Poking {}: {} -> {}".format(poke.name, poke.pretty_address, poke.pretty_value))
         self.memshark.poke(poke.address, poke.value)
 
     def change_frozen_values(self, name, index, mode):
@@ -82,6 +83,5 @@ class GameActionsFrame():
     def freeze_pokes(self, pokes, interval_seconds, memshark):
         while True and not GameActionsFrame.KILL_THREAD:
             for poke in pokes:
-                print("--DEBUG Poking {}: {} -> {}".format(poke.name, poke.address, poke.value))
-                memshark.poke(poke.address, poke.value)
+                self.poke(poke)
             time.sleep(interval_seconds)

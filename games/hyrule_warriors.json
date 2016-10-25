@@ -3,14 +3,49 @@
 	"version": "1.11.0",
 	"memory_pokes":[
 		{
-			"name":"Player 1 - Damage Taken",
+			"name": "Max Rupees",
+			"address": "0x35614E84",
+			"value": 9999999
+		},
+		{
+			"name": "Player 1 - Damage Taken",
 			"address": "0x1071211C",
 			"value": 0
 		},
 		{
-			"name":"Player 1 - High K.O. Count",
+			"name": "Player 1 - High K.O. Count",
 			"address": "0x10712120",
 			"value": 13337
+		},
+		{
+			"name": "Player 1 - Fill Magic",
+			"address": "0x107121AC",
+			"value": "0x01010000"
+		},
+		{
+			"name": "Player 1 - Fill Special",
+			"address": "0x1071219C",
+			"value": "0x03030000"
+		},
+		{
+			"name": "Player 2 - Damage Taken",
+			"address": "0x10712344",
+			"value": 0
+		},
+		{
+			"name": "Player 2 - High K.O. Count",
+			"address": "0x10712348",
+			"value": 13337
+		},
+		{
+			"name": "Player 2 - Fill Magic",
+			"address": "0x107123D4",
+			"value": "0x01010000"
+		},
+		{
+			"name": "Player 2 - Fill Special",
+			"address": "0x107123C4",
+			"value": "0x03030000"
 		}
 	]
 }

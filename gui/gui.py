@@ -31,7 +31,7 @@ class MainWindow:
         self.notebook = ttk.Notebook(self.container)
         self.server_frame = exploit_server_frame.ExploitServerFrame(self.notebook, exploit_server)
         self.tcp_gecko_frame = tcp_gecko_frame.TcpGeckoFrame(self.notebook, memshark)
-        self.game_actions_frame = game_actions_frame.GameActionsFrame(self.notebook, games, memshark)
+        self.game_actions_frame = game_actions_frame.GameActionsFrame(self.notebook, games, memshark, config)
         self.notebook.add(self.server_frame.master, text='Exploit Server', padding=[10,10])
         self.notebook.add(self.tcp_gecko_frame.master, text='PyGecko', padding=[10,10])
         self.notebook.add(self.game_actions_frame.master, text='Game Actions', padding=[10,10])           

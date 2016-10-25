@@ -33,10 +33,16 @@ class MemoryPoke():
 		val = self.raw['value']
 		if isinstance(val, int):
 			self.value = val
+			self.base = 10
 		else:
 			if '0x' in val:
-				self.value = int(val, 16)
+				self.base = 16
+				self.value = int(val, self.base)
 			elif 'base' in self.raw:
 				self.value = int(val, self.raw['base'])
+				self.base = self.raw['base']
 			else:
-				self.value = int(val, 10)
+				self.base = 10
+				self.value = int(val, self.base)
+		self.pretty_address = self.raw['address']
+		self.pretty_value = self.raw['value']
