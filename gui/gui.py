@@ -9,7 +9,6 @@ class MainApp:
 
     def __init__(self, config, games, memshark, exploit_server):
         self.root = tk.Tk()
-        self.root.geometry('{}x{}'.format(800, 600))
         self.mainWindow = MainWindow(self.root, config, games, memshark, exploit_server)
 
     def start(self):
@@ -25,7 +24,7 @@ class MainWindow:
         self.master.title("Memshark")
 
         self.container = tk.Frame(self.master)
-        self.container.grid(padx=(50,0), pady=(50,0))
+        self.container.grid(padx=(20,20), pady=(20,20))
 
         self.label = tk.Label(self.container, text="Wii U IP Address: {}".format(config.wii_u_ip))
 

@@ -30,4 +30,13 @@ class MemoryPoke():
 		self.raw = dataDict
 		self.name = self.raw['name']
 		self.address = int(self.raw['address'], 16)
-		self.value = int(self.raw['value'], 16)
+		val = self.raw['value']
+		if isinstance(val, int):
+			self.value = val
+		else:
+			if '0x' in val:
+				self.value = int(val, 16)
+			elif 'base' in self.raw:
+				self.value = int(val, self.raw['base'])
+			else:
+				self.value = int(val, 10)
