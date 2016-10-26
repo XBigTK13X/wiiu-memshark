@@ -52,3 +52,9 @@ class ExploitServer():
 
     def get_listen_url(self):
         return "http://{}:{}".format(self.machine_ip, self.listen_port)
+
+    def handle_message(self, message):
+        getattr(self, message)()
+
+    def background(self):
+        nothing = True

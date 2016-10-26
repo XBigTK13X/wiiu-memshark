@@ -62,8 +62,10 @@ class GameActionsFrame():
         self.game_actions_frame.grid()
 
     def poke(self, poke):
-        print("--DEBUG Poking {}: {} -> {}".format(poke.name, poke.pretty_address, poke.pretty_value))
-        self.memshark.poke(poke.address, poke.value)
+        self.memshark.send_message({
+            'action': 'poke',
+            'poke': poke
+            })
 
     def change_frozen_values(self, name, index, mode):
         pokes = []
@@ -72,16 +74,4 @@ class GameActionsFrame():
             if len(tup) > freeze_var_position:
                 if tup[freeze_var_position].get() == 1:
                     pokes.append(tup[len(tup)-1])
-        if self.poke_thread != None:
-            GameActionsFrame.KILL_THREAD = True
-            self.poke_thread.join()
-        if len(pokes) > 0:
-            GameActionsFrame.KILL_THREAD = False
-            self.poke_thread = threading.Thread(target=self.freeze_pokes, args=(pokes, self.config.freeze_poke_interval_seconds, self.memshark))
-            self.poke_thread.start()
-
-    def freeze_pokes(self, pokes, interval_seconds, memshark):
-        while True and not GameActionsFrame.KILL_THREAD:
-            for poke in pokes:
-                self.poke(poke)
-            time.sleep(interval_seconds)
+        self.memshark.send_message(pokes)

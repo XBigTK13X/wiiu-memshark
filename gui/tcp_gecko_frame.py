@@ -14,9 +14,9 @@ class TcpGeckoFrame():
         self.disconnect_button.grid(padx=(10,0), pady=(10,0))    
 
     def connect(self):
-        self.memshark.connect()
+        self.memshark.send_message("connect")
         self.connection_status_label.config(text='Connected')
 
     def disconnect(self):
-        self.memshark.disconnect()
+        self.memshark.send_message("disconnect")
         self.connection_status_label.config(text='Disconnected')

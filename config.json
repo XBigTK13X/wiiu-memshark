@@ -1,6 +1,5 @@
 {
 	"wii_u_ip": "192.168.1.119",
-	"freeze_poke_interval_seconds": 2,
 	"window_width": 800,
 	"window_height": 600
 }
