@@ -7,7 +7,6 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 class ExploitHandler(BaseHTTPRequestHandler):
 
     def do_GET(self):
-        print("GET is happening")
         self.send_response(200)
 
         mimeType = 'text/html'
@@ -22,7 +21,6 @@ class ExploitHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
         file_path = os.path.join(os.path.join(os.getcwd(), 'site/'), self.path[1:len(self.path)])
-        print("Trying to serve: {}".format(file_path))
         with open(file_path, 'rb') as html_data:
             self.wfile.write(html_data.read())
         return

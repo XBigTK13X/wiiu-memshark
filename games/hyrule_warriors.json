@@ -28,6 +28,46 @@
 			"value": "0x03030000"
 		},
 		{
+			"name": "Player 1 - Weapon Slot 1 - 0 KOs",
+			"address": "0x356E8B90",
+			"value": 0
+		},
+		{
+			"name": "Player 1 - Weapon Slot 2 - 0 KOs",
+			"address": "0x356E8B94",
+			"value": 0
+		},
+		{
+			"name": "Player 1 - Weapon Slot 3 - 0 KOs",
+			"address": "0x356E8B98",
+			"value": 0
+		},
+		{
+			"name": "Player 1 - Weapon Slot 4 - 0 KOs",
+			"address": "0x356E8B9C",
+			"value": 0
+		},
+		{
+			"name": "Player 1 - Weapon Slot 5 - 0 KOs",
+			"address": "0x356E8BA0",
+			"value": 0
+		},
+		{
+			"name": "Player 1 - Weapon Slot 6 - 0 KOs",
+			"address": "0x356E8BA4",
+			"value": 0
+		},
+		{
+			"name": "Player 1 - Weapon Slot 7 - 0 KOs",
+			"address": "0x356E8BA8",
+			"value": 0
+		},
+		{
+			"name": "Player 1 - Weapon Slot 8 - 0 KOs",
+			"address": "0x356E8BAC",
+			"value": 0
+		},
+		{
 			"name": "Player 2 - Damage Taken",
 			"address": "0x10712344",
 			"value": 0
@@ -46,6 +86,46 @@
 			"name": "Player 2 - Fill Special",
 			"address": "0x107123C4",
 			"value": "0x03030000"
+		},
+		{
+			"name": "Player 2 - Weapon Slot 1 - 0 KOs",
+			"address": "0x356E3508",
+			"value": 0
+		},
+		{
+			"name": "Player 2 - Weapon Slot 2 - 0 KOs",
+			"address": "0x356E350C",
+			"value": 0
+		},
+		{
+			"name": "Player 2 - Weapon Slot 3 - 0 KOs",
+			"address": "0x356E3510",
+			"value": 0
+		},
+		{
+			"name": "Player 2 - Weapon Slot 4 - 0 KOs",
+			"address": "0x356E3514",
+			"value": 0
+		},
+		{
+			"name": "Player 2 - Weapon Slot 5 - 0 KOs",
+			"address": "0x356E3518",
+			"value": 0
+		},
+		{
+			"name": "Player 2 - Weapon Slot 6 - 0 KOs",
+			"address": "0x356E351C",
+			"value": 0
+		},
+		{
+			"name": "Player 2 - Weapon Slot 7 - 0 KOs",
+			"address": "0x356E3520",
+			"value": 0
+		},
+		{
+			"name": "Player 2 - Weapon Slot 8 - 0 KOs",
+			"address": "0x356E3524",
+			"value": 0
 		}
 	]
 }

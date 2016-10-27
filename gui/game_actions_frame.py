@@ -10,6 +10,7 @@ class GameActionsFrame():
     KILL_THREAD = False
 
     def __init__(self, master, games, memshark, config):
+        self.freeze_var_position = 5
         self.master = tk.Frame(master)
 
         self.games = games
@@ -23,13 +24,18 @@ class GameActionsFrame():
         self.game_selected.set("Choose a game...")
         self.game_selected.trace('w', self.change_game_selection)
         self.game_list = tk.OptionMenu(self.master, self.game_selected, *self.game_options)
-        self.game_list.config(width=50, padx=10, pady=10)
+        self.game_list.config(width=50, padx=10)
         # Calling this before the app is drawn causes it to crash
         # self.game_selected.set(self.game_options[0])
         self.game_list.grid()
 
         self.game_version = tk.Label(self.master, text='')
         self.game_version.grid()
+
+        self.check_all_button = tk.Button(self.master, text="Check All", command=self.freeze_all)
+        self.uncheck_all_button = tk.Button(self.master, text="Uncheck All", command=self.unfreeze_all)
+        self.check_all_button.grid(padx=(10,0))
+        self.uncheck_all_button.grid(padx=(10,0), pady=(10,10))
 
     def change_game_selection(self, name, index, mode):
         if self.game_actions_frame != None:
@@ -69,9 +75,18 @@ class GameActionsFrame():
 
     def change_frozen_values(self, name, index, mode):
         pokes = []
-        freeze_var_position = 5
         for tup in self.game_pokes:
-            if len(tup) > freeze_var_position:
-                if tup[freeze_var_position].get() == 1:
+            if len(tup) > self.freeze_var_position:
+                if tup[self.freeze_var_position].get() == 1:
                     pokes.append(tup[len(tup)-1])
         self.memshark.send_message(pokes)
+
+    def freeze_all(self):
+        for tup in self.game_pokes:
+            if len(tup) > self.freeze_var_position:
+                tup[self.freeze_var_position].set(1)
+
+    def unfreeze_all(self):
+        for tup in self.game_pokes:
+            if len(tup) > self.freeze_var_position:
+                tup[self.freeze_var_position].set(0)
