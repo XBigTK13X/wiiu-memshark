@@ -1,131 +1,51 @@
 {
 	"name":"Hyrule Warriors",
-	"version": "1.11.0",
+	"version": "1.12.0",
 	"memory_pokes":[
 		{
 			"name": "Max Rupees",
-			"address": "0x35614E84",
+			"address": "0x35617294",
 			"value": 9999999
 		},
 		{
 			"name": "Player 1 - Damage Taken",
-			"address": "0x1071211C",
+			"address": "0x1071387C",
 			"value": 0
 		},
 		{
 			"name": "Player 1 - High K.O. Count",
-			"address": "0x10712120",
-			"value": 13337
+			"address": "0x10713880",
+			"value": 10000
 		},
 		{
 			"name": "Player 1 - Fill Magic",
-			"address": "0x107121AC",
+			"address": "0x1071390C",
 			"value": "0x01010000"
 		},
 		{
 			"name": "Player 1 - Fill Special",
-			"address": "0x1071219C",
+			"address": "0x107138FC",
 			"value": "0x03030000"
 		},
 		{
-			"name": "Player 1 - Weapon Slot 1 - 0 KOs",
-			"address": "0x356E8B90",
-			"value": 0
-		},
-		{
-			"name": "Player 1 - Weapon Slot 2 - 0 KOs",
-			"address": "0x356E8B94",
-			"value": 0
-		},
-		{
-			"name": "Player 1 - Weapon Slot 3 - 0 KOs",
-			"address": "0x356E8B98",
-			"value": 0
-		},
-		{
-			"name": "Player 1 - Weapon Slot 4 - 0 KOs",
-			"address": "0x356E8B9C",
-			"value": 0
-		},
-		{
-			"name": "Player 1 - Weapon Slot 5 - 0 KOs",
-			"address": "0x356E8BA0",
-			"value": 0
-		},
-		{
-			"name": "Player 1 - Weapon Slot 6 - 0 KOs",
-			"address": "0x356E8BA4",
-			"value": 0
-		},
-		{
-			"name": "Player 1 - Weapon Slot 7 - 0 KOs",
-			"address": "0x356E8BA8",
-			"value": 0
-		},
-		{
-			"name": "Player 1 - Weapon Slot 8 - 0 KOs",
-			"address": "0x356E8BAC",
-			"value": 0
-		},
-		{
 			"name": "Player 2 - Damage Taken",
-			"address": "0x10712344",
+			"address": "0x10713AA4",
 			"value": 0
 		},
 		{
 			"name": "Player 2 - High K.O. Count",
-			"address": "0x10712348",
-			"value": 13337
+			"address": "0x10713AA8",
+			"value": 10000
 		},
 		{
 			"name": "Player 2 - Fill Magic",
-			"address": "0x107123D4",
+			"address": "0x10713B34",
 			"value": "0x01010000"
 		},
 		{
 			"name": "Player 2 - Fill Special",
-			"address": "0x107123C4",
+			"address": "10713B24",
 			"value": "0x03030000"
-		},
-		{
-			"name": "Player 2 - Weapon Slot 1 - 0 KOs",
-			"address": "0x356E3508",
-			"value": 0
-		},
-		{
-			"name": "Player 2 - Weapon Slot 2 - 0 KOs",
-			"address": "0x356E350C",
-			"value": 0
-		},
-		{
-			"name": "Player 2 - Weapon Slot 3 - 0 KOs",
-			"address": "0x356E3510",
-			"value": 0
-		},
-		{
-			"name": "Player 2 - Weapon Slot 4 - 0 KOs",
-			"address": "0x356E3514",
-			"value": 0
-		},
-		{
-			"name": "Player 2 - Weapon Slot 5 - 0 KOs",
-			"address": "0x356E3518",
-			"value": 0
-		},
-		{
-			"name": "Player 2 - Weapon Slot 6 - 0 KOs",
-			"address": "0x356E351C",
-			"value": 0
-		},
-		{
-			"name": "Player 2 - Weapon Slot 7 - 0 KOs",
-			"address": "0x356E3520",
-			"value": 0
-		},
-		{
-			"name": "Player 2 - Weapon Slot 8 - 0 KOs",
-			"address": "0x356E3524",
-			"value": 0
 		}
 	]
 }
