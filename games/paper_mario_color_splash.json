@@ -1,0 +1,21 @@
+{
+	"name":"Paper Mario - Color Splash",
+	"version": "Nov.13.2016",
+	"memory_pokes":[
+		{
+			"name": "Max Coins",
+			"address": "0x4E2A2E6C",
+			"value": 9999
+		},
+		{
+			"name": "Health",
+			"address": "0x4E2A2E64",
+			"value": 999
+		},
+		{
+			"name": "Max Health",
+			"address": "0x4E2A2E68",
+			"value": 999
+		}
+	]
+}
